@@ -19,7 +19,7 @@ runmodel = function(parmfile,outfile,plots=FALSE,saveplots=FALSE) {
   #define forcing functions that interpolate between data points
 
   for(i in 1:(ncol(forcings)-1)) {
-    assign(paste("func.",colnames(forcings)[i+1],sep=""), approxfun(x=forcings[,1], y=forcings[,(i+1)],method="constant", rule=2, f=0),envir = .GlobalEnv)
+    assign(paste("func.",colnames(forcings)[i+1],sep=""), approxfun(x=forcings[,1], y=forcings[,(i+1)],method="linear", rule=2, f=0),envir = .GlobalEnv)
   }
 
   #run the model
@@ -67,7 +67,7 @@ multirun = function(parmfile,changefile,outfile,plots=FALSE,saveplots=FALSE) {
     }
 
     for(k in 1:(ncol(forcings)-1)) {
-      assign(paste("func.",colnames(forcings)[k+1],sep=""), approxfun(x=forcings[,1], y=forcings[,(k+1)],method="constant", rule=2, f=0),envir = .GlobalEnv)
+      assign(paste("func.",colnames(forcings)[k+1],sep=""), approxfun(x=forcings[,1], y=forcings[,(k+1)],method="linear", rule=2, f=0),envir = .GlobalEnv)
     }
  
     modelout=0
@@ -82,7 +82,7 @@ multirun = function(parmfile,changefile,outfile,plots=FALSE,saveplots=FALSE) {
   
   }
   filelist=cbind(filelist,changes)
-  colnames(filelist)[1:2] = c("File","Date")
+  colnames(filelist)[1] = "File"
   multifile = paste("Outputs/", outfile, "_runs",".R",sep="")
   write(comment,file=multifile)
   write.fwf(as.data.frame(filelist), file=multifile, quote=TRUE, append=TRUE)

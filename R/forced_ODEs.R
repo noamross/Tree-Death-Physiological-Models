@@ -23,8 +23,9 @@ tree_odes = function(time, states, parms) {
   with(c(as.list(states), parms), { #extract parameters from 'parms' vector
     Psi_s = func.Psi_s(time)
     D = func.D(time)
-    Psi_l = uniroot(leaf,c(-30,(b/K + Psi_s - h*rho*g)),c(as.list(states),parms,Psi_s=Psi_s,D=D))$root #Calculate leaf water potential
+    Psi_l = uniroot(leaf,c(-30,(b/K + Psi_s - h*rho*g)),parms = c(as.list(states),parms,Psi_s=Psi_s,D=D))$root #Calculate leaf water potential
     G = (K/D)*(Psi_s - Psi_l - h*rho*g)
+    
     ABA = (-a*Psi_s)/(G*D + b)
     X = -(Psi_s - Psi_l - h*rho*g) # Calculate xylem pressure
     #G = gmax - (-X/gs) # Calculate stomatal flow.  

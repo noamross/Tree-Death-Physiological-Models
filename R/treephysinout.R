@@ -50,7 +50,7 @@ load.comment = function(file) {
 
 
 load.changes = function(file) {
-  changes = as.matrix(read.table(file,header=TRUE,sep=" ",skip=0,strip.white=TRUE))
+  changes = as.matrix(read.table(file,header=TRUE,sep=" ",skip=3,strip.white=TRUE))
   return(changes)
 }
 

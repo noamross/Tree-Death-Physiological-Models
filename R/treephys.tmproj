@@ -3,16 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>../realparms.R</string>
+	<string>treephysinout.R</string>
 	<key>documents</key>
 	<array>
 		<dict>
 			<key>filename</key>
 			<string>../realparms.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T20:23:43Z</date>
-			<key>selected</key>
-			<true/>
+			<date>2011-07-29T19:00:20Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -24,7 +22,7 @@
 			<key>filename</key>
 			<string>../changeparms.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T14:06:53Z</date>
+			<date>2011-07-29T18:52:00Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -48,25 +46,27 @@
 			<key>filename</key>
 			<string>treephysinout.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T20:07:39Z</date>
+			<date>2011-07-29T19:00:20Z</date>
+			<key>selected</key>
+			<true/>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>multirunfunc.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T19:52:47Z</date>
+			<date>2011-07-29T18:52:13Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>runmodelscriptstop.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T20:21:54Z</date>
+			<date>2011-07-29T18:55:32Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>modelplots.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T19:42:10Z</date>
+			<date>2011-07-29T18:10:48Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -78,7 +78,7 @@
 			<key>filename</key>
 			<string>forced_ODEs.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T20:19:53Z</date>
+			<date>2011-07-29T18:41:32Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
@@ -90,13 +90,13 @@
 			<key>filename</key>
 			<string>weibullcurves.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T19:45:21Z</date>
+			<date>2011-07-29T18:52:02Z</date>
 		</dict>
 		<dict>
 			<key>filename</key>
 			<string>../px.R</string>
 			<key>lastUsed</key>
-			<date>2011-07-26T19:46:52Z</date>
+			<date>2011-07-29T18:32:41Z</date>
 		</dict>
 	</array>
 	<key>fileHierarchyDrawerWidth</key>
@@ -108,71 +108,85 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>4</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>15</integer>
+				<integer>0</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
 			<integer>0</integer>
+		</dict>
+		<key>../px.R</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>27</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>9</integer>
 		</dict>
 		<key>../realparms.R</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>11</integer>
+				<integer>7</integer>
 				<key>line</key>
 				<integer>34</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>5</integer>
+			<integer>9</integer>
 		</dict>
 		<key>forced_ODEs.R</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>9</integer>
+				<integer>1</integer>
 				<key>line</key>
-				<integer>28</integer>
+				<integer>44</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>6</integer>
+			<integer>20</integer>
 		</dict>
 		<key>modelplots.R</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>31</integer>
 				<key>line</key>
-				<integer>158</integer>
+				<integer>83</integer>
 			</dict>
 			<key>columnSelection</key>
 			<false/>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>32</integer>
+			<integer>68</integer>
 			<key>selectFrom</key>
 			<dict>
 				<key>column</key>
-				<integer>50</integer>
+				<integer>28</integer>
 				<key>line</key>
-				<integer>158</integer>
+				<integer>83</integer>
 			</dict>
 			<key>selectTo</key>
 			<dict>
 				<key>column</key>
-				<integer>2</integer>
+				<integer>31</integer>
 				<key>line</key>
-				<integer>158</integer>
+				<integer>83</integer>
 			</dict>
 		</dict>
 		<key>multirunfunc.R</key>
@@ -180,14 +194,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>102</integer>
+				<integer>119</integer>
 				<key>line</key>
-				<integer>63</integer>
+				<integer>69</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>40</integer>
+			<integer>62</integer>
 		</dict>
 		<key>runmodelscriptstop.R</key>
 		<dict>
@@ -196,7 +210,7 @@
 				<key>column</key>
 				<integer>29</integer>
 				<key>line</key>
-				<integer>14</integer>
+				<integer>13</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
@@ -208,14 +222,14 @@
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>0</integer>
+				<integer>55</integer>
 				<key>line</key>
-				<integer>56</integer>
+				<integer>52</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>62</integer>
 		</dict>
 		<key>weibullcurves.R</key>
 		<dict>
@@ -229,13 +243,14 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>62</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>runmodelscriptstop.R</string>
 		<string>../realparms.R</string>
+		<string>../px.R</string>
 		<string>treephysinout.R</string>
 		<string>forced_ODEs.R</string>
 		<string>multirunfunc.R</string>
@@ -246,6 +261,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{218, 193}, {1051, 585}}</string>
+	<string>{{218, 258}, {1054, 520}}</string>
 </dict>
 </plist>
