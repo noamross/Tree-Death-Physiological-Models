@@ -1,0 +1,66 @@
+\documentclass[12pt]{amsart}
+\usepackage{geometry}
+\geometry{a4paper}
+
+\title{A mechanistic model of individual tree mortality under drought}
+\author{Noam Ross}
+
+\begin{document}
+\maketitle
+
+\section{Model Definition}
+
+Soil water potenial $\Psi_s$ (in MPa) and leaf surface moisture deficit $D$ (in MPa) are driven exogenously and for now do not change:
+
+\begin{equation}\label{Psi_s}
+\frac{d\Psi_s}{dt} = 0
+\end{equation}
+
+\begin{equation}\label{sD}
+\frac{dD}{dt} = 0
+\end{equation}
+
+Xylem pressure is a function of the 
+
+The tree's store of non-structural carbohydrates $S$ (in g) changes according to four metabolic processes:
+
+\begin{equation}\label{dS}
+\frac{dS}{dt} = P - R - M - B
+\end{equation}
+
+Where $P$ is photosynthesis, $R$ is respiration, $M$ is maintenance, and $B$ is growth, all in grams per day.  These processes
+
+\begin{equation}\label{P}
+P = \alpha G
+\end{equation}
+where $G$ is stomatal conductance (, and $\alpha$ is a constant.
+\begin{equation}\label{M}
+M = mS
+  \end{equation}
+where m is a constant
+\begin{equation}
+
+  \end{equation}
+\begin{equation}
+  \end{equation}
+
+
+
+
+
+$R$ is a function of respiration related to growth and Maintenance respiration
+\begin{equation}\label{E:Respiration}
+R_i = g G_i + M_i
+\end{equation}
+where $g$ is the inverse of growth efficiency
+\\
+\\
+$M$ is a function of biomass $B$ , water stress, and temperature $T$
+\begin{equation}\label{E:Maintenance}
+M_i = f(B, T, W)
+\end{equation}
+\begin{equation}\label{E:Plantwater}
+E = K_l (\Psi_s - \Psi_l - h p_w g)
+\end{equation}
+$E$ is evapotranspiration, $K_l$ is leaf-specific hydraulic conductance, $\Psi_s$ and $\Psi_l$ are the soil- and leaf- water potentials, $h$ is height, $p_w$ is density of water and $g$ is the force of gravity.
+\end{document}

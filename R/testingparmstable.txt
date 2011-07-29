@@ -1,0 +1,11 @@
+"Symbol", "Value", "Unit", "Notes"
+
+"Start time", "t_0", "day", 1, "N/A"
+"End Time", "t_f", "day", 500, "N/A"
+"Time Step", "t_inc", "days", 1, "N/A"
+"Initial soil water potential", "Psi_s", "MPa", -1, "Guess"
+"Initial leaf surface moisture", "D", "MPa", -2, "Guess"
+"Initial carbohydrates", "S", "g", 5, "Guess"
+"Xylem conductance", "K", "mmol s-1 MPa-1", 1, "Guess"
+
+"Photsynthetic rate per stomatal conductance", "alpha", "g s MPa mmol-1 d-1", 1, "Guess"

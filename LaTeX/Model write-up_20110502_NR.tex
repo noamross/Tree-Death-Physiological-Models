@@ -1,0 +1,204 @@
+\documentclass[12pt]{amsart}
+\usepackage{geometry}
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{float}
+\geometry{a4paper}
+\title{A mechanistic model of individual tree mortality under drought}
+\author{Noam Ross}
+
+\begin{document}
+\bibliographystyle{ecology}
+
+\maketitle
+
+
+\section{Testing}
+
+mmol$^{-1}$
+% latex table generated in R 2.10.0 by xtable 1.5-6 package
+% Sun May 29 20:24:34 2011
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{llrr}
+  \hline
+ & In R code & Value & Units \\ 
+  \hline
+$\alpha$ & \texttt{alpha} & 3 & g s MPa mmol-1 d-1 \\ 
+  $\beta$ & \texttt{beta} & 0.5 & g g-1 d-1 \\ 
+  $\gamma$ & \texttt{gamma} & 0 & g g-1 d-1 \\ 
+  $\theta$ & \texttt{theta} & 0.075 & mmol s-1 MPa-1 d-1 g-1 \\ 
+  $k_{max}$ & \texttt{kmax} & 10 & mmol s-1 MPa-1 \\ 
+  $m$ & \texttt{m} & 0 & g d-1 \\ 
+  $l_B$ & \texttt{l.B} & 1 &  \\ 
+  $k_B$ & \texttt{k.B} & 1 &  \\ 
+  $l_K$ & \texttt{l.K} & 0.45 &  \\ 
+  $k_K$ & \texttt{k.K} & 3.85 &  \\ 
+  $G_{min}$ & \texttt{G.min} & 0.05 & mmol s-1 MPa-1 \\ 
+  $h$ & \texttt{h} & 1 & m \\ 
+  $\rho$ & \texttt{rho} & 1 & g cm-3 \\ 
+  $g$ & \texttt{g} & 1 & m s-2 \\ 
+  $\zeta$ & \texttt{zeta} & 1 &  \\ 
+  $\omega$ & \texttt{omega} & 1 &  \\ 
+  $\tau$ & \texttt{tau} & 0.95 &  \\ 
+  $a$ & \texttt{a} & 0.1 &  \\ 
+  $b$ & \texttt{b} & 5 &  \\ 
+   \hline
+\end{tabular}
+\caption{Parameters}
+\end{center}
+\end{table}
+
+
+In order to incorporate the feedforward response of stomata to soil drying, I incorporate components of the model of \citet{Tardieu1993a} that integrates hydraulic and chemical signaling in control of stomata. 
+
+\begin{equation}\label{Tardieu1}
+G = G_{min} + \omega e^{-\zeta [ABA] e^{-\tau \Psi_l}}
+\end{equation}
+
+Here $G$ is canopy stomatal conductance, bounded by $G_{min}$ and $G_{min} + \omega$.  $[ABA]$ is the concentration of root-sourced abscisic acid in the leaf, which is the primary control over stomatal conductance.  The sensitivity to $[ABA]$ is controlled by leaf water potential $\Psi_l$, and the parameter $\tau$ determines the level of control.   $\tau = 0$ represents the behavior of anisohydric species, such as sunflower and juniper.
+
+ABA is produced in the roots, and increases linearly with root water potential.  In this model I simiplify by assuming that root water potential equals soil water potential, or that flow resistance to flow is zero.  ABA is transported and diluted via water flow through the xylem, and consumed in the leaf.  Thus,
+\begin{equation}\label{Tardieu2}
+[ABA] = \frac{-a \Psi_s}{GD + b}
+\end{equation}
+Where $a$ is the ABA production coefficient and $b$ is the consumption rate.  The assumption that $\Psi_s = \Psi_{root}$ is unrealistic, but adding soil resistance would not substantively effect model behavior, except allow embolism to occurs in the rhizosphere in addition to the xylem.
+
+Together with the expression for transpiration we have a system of three equations with three unknowns, $G$, $[ABA]$ and $\Psi_l$.
+\begin{equation}\label{GD}
+GD = K(\Psi_s - \Psi_l - h\rho g)
+\end{equation}
+
+We can combine them to a single expression of $\Psi_l$, but it is intractable:
+
+\begin{equation}\label{pain}
+G_{min} - \frac{K}{D}(\Psi_s - \Psi_l - h \rho g) + \omega e^{\zeta \frac{a \Psi_s}{K(\Psi_s - \Psi_l - h \rho g) + b} e^{- \tau \Psi_l}} = 0
+\end{equation}
+However, $\Psi_l$ can be found numerically.   Currently my simulation solves the above equation for $\Psi_l$ at each time and then calculates $G$, $[ABA]$ and derivatives for the remainder of the model, which remains the same as discussed previously.
+
+\section{Current Issues and Next Steps}
+ 
+\begin{enumerate}
+  \item While the new  version of the program with numerical solver is nominally working, my previous ad-hoc parameterization is broken. 
+  \begin{enumerate}
+  	\item I need to take a more systematic approach to parameterizing the model.  One approach that will help is defining parameters in terms of measures found in the literature.  For instance, the $\lambda$ and $k$ values in the Weibull function are rarely measured, but $\Psi_{50}$, the xylem pressure at which embolism reduces conductivity by 50\%, is often reported.
+	\item I also need to make some reports/graphs that make the output more intutitive
+  \end{enumerate}
+  \item Adding the numerical solver increased the computational requirements of the program, and these will increase as I start running multiple simulations to find bifurcations.
+  \begin{enumerate}
+  	\item I've had Matt set me up on \texttt{one.davis.edu} and will set up my work flow so that I can run simulations on that server.
+  \end{enumerate}
+\end{enumerate}
+
+\pagebreak
+
+
+\section{Introduction}
+
+This model of tree physiology designed to illuminate the paths a tree may follow to mortality under drought.  It is based largely on hypotheses proposed in \citet{McDowell2011} that xylem failure and carbon starvation may exhibit positive feedbacks on one another and lead to tree death via either mechanism or vulnerability to pathogens.  The purpose of creating the model is to identify  conditions under which trees die of each mechanism, as well as explore the behavior of the model near critical water levels so as to generate hypotheses of potential warning signals for tree death.
+
+\section{Model Definition}
+
+The current model is at the scale of a single tree with no branching structure (a "tube" model).  The time scale is daily - changes in stomatal conductance, xylem conductance and pressure are assumed to occur instantaneously, while differential equations define changes in carbon flow and damage to the xylem.
+
+Soil water potenial $\Psi_s$ (in MPa) and leaf surface moisture deficit $D$ (in MPa) are driven exogenously and for now do not change:
+\begin{equation}\label{Psi_s}
+\frac{d\Psi_s}{dt} = 0
+\end{equation}
+\begin{equation}\label{sD}
+\frac{dD}{dt} = 0
+\end{equation}
+Evapotranspiration $E$ is equal to both water transport through the xylem and leaf water conductance:
+
+\begin{equation}\label{E}
+E = GD = K\underbrace{(\Psi_s - \Psi_l - h\rho g)}_{\Delta\Psi \; = \;xylem\;  pressure}
+\end{equation}
+Here $G$ is canopy stomatal conductance (mmol s-1 MPa-1), $K$ is xylem conductance (mmol s-1 MPa-1), $\Psi_l$ is leaf water potential (MPa), $h$ is canopy height, $\rho$ the density of water, and $g$ the force of gravity.
+
+The tree is assumed to regulate stomatal conductance $G$ instantaneously in response to xylem pressure
+\begin{equation}\label{G}
+G = G_{max} - \frac{-\Delta\Psi}{g_s}
+\end{equation}
+
+I combine \eqref{E} and \eqref{G} to solve for xylem pressure:
+
+\begin{equation}\label{DPsi}
+\Delta\Psi = \frac{DG_{max}}{K - D/g_s}
+\end{equation}
+
+Where $G_{max}$ is the maximum stomatal conductance (mmol s-1 MPa-1) and $g_s$ is the stomatal closure factor.
+
+Xylem conductance $K$ is reduced when the xylem is damaged by embolism.  This occurs via a Weibull function
+
+\begin{equation}\label{dK}
+\frac{dK}{dt} = -K(\frac{k_K}{\lambda_K})(\frac{-\Delta\Psi}{\lambda_K})^{k_K-1}e^{-(\Delta\Psi/\lambda_K)^{k_K}} + \theta R
+\end{equation}
+where $\lambda_K$ and $k_K$ are dimensionless scale and shape parameters for the conductance Weibull function, $R$ is carbon allocation to xylem repair (g d-1), and $\theta$ is the efficacy of repair (mmol s-1 MPa-1 d-1 g-1)
+
+The tree's store of non-structural carbohydrates $S$ (in g) changes according to four metabolic processes:
+\begin{equation}\label{dS}
+\frac{dS}{dt} = P - R - M - B
+\end{equation}
+where $P$ is photosynthesis, $R$ is xylem repair, $M$ is maintenance respiration, and $B$ is growth, all in grams per day.  Photosynthesis is assumed to be limited only by flow of CO2 through the stomata:
+\begin{equation}\label{P}
+P = \alpha G
+\end{equation}
+$\alpha$ is the photosynthetic coefficient (g s MPa mmol-1 d-1)
+
+Xylem repair $R$ is driven both by level of xylem damage and availability of sugars.
+\begin{equation}\label{R}
+R = \beta S (1 - K/K_{max})
+ \end{equation}
+ $\beta$ is the repair coefficent (g g-1 d-1) and $K_{max}$ is the maximum xylem conductance
+
+Maintenance respiration $M$ is constant
+\begin{equation}\label{M}
+M = m
+\end{equation}
+ 
+The tree can regulate growth $B$ according to sugar availability and water stress
+ \begin{equation}\label{B}
+ B = \gamma S e^{-(-\Delta\Psi/\lambda_B)^{k_B}}
+\end{equation}
+$\gamma$ is the growth coefficient (g g-1 d-1), and $\lambda_B$ and $k_B$ are dimensionless scale and shape parameters for the Weibull function regulating growth.   
+ 
+\section{Simulations}
+I've implemented this model in R and have begun to explore the parameter space.  Here is one example run:
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=1\linewidth]{../Outputs/Modelrun_20110413_145428.pdf}
+\caption{An example run of the model}
+\label{example1}
+\end{center}
+\end{figure}
+
+
+\section{Questions to Address}
+ 
+\begin{enumerate}
+  \item Does the model reproduce the patterns summarized in \citet{McDowell2011}, namely, carbohydrate storage rising intially under drought before decline?
+  \item What factors cause death to occur via total xylem failure vs. exhaustion of carbohydrates (carbon starvation)?
+  \item What are other appropriate functions for stomatal control and growth?  How is the model sensitive to changes in the forms of these equations?  Should stomatal growth be controlled by xylem pressure or leaf water potential?
+  \item Are there bifurcations in behavior as water availability changes?
+  \item What happens when we drive the model with changing water availability?
+\end{enumerate}
+  
+\section{Tasks}
+\begin{enumerate}
+  \item Standardize and document the code better
+  \item Set up a run environment for better documentation/graphing
+  \item Start hunting for parameter values
+  \item Do a phase-plane diagram
+  \item Write up a lit review including (a) mortality mechanisms and (b) stomatal control
+\end{enumerate}
+
+
+\bibliography{/Users/noamross/Dropbox/Public/library}
+
+\end{document}
+
+   \begin{matrix} % or pmatrix or bmatrix or Bmatrix or ...
+      a & b \\
+      c & d \\
+   \end{matrix}

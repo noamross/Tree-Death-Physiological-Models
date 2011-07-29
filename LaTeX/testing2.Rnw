@@ -1,0 +1,14 @@
+\documentclass[a4paper]{article}
+
+\begin{document}
+\section{First Table}
+\SweaveOpts{echo=false}
+<<results=tex>>=
+
+library(xtable)
+z = read.table("~/Dropbox/Workspace/testingparmstable.csv", header=TRUE, sep=",")
+xtable(z, caption="Parameter Values for Model Run")
+@ 
+
+\end{document}
+
